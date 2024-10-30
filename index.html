@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Обчислення Площі Прямокутника</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+        }
+        .input-container {
+            margin-bottom: 20px;
+        }
+        .input-field {
+            padding: 10px;
+            border: 1px solid #4a90e2;
+            border-radius: 5px;
+            width: 100px;
+            font-size: 16px;
+        }
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .rectangle {
+            margin-top: 20px;
+            background-color: #e67e22;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Обчислення Площі Прямокутника</h1>
+    <div class="input-container">
+        <input type="number" id="lengthInput" class="input-field" placeholder="Довжина (a)">
+        <input type="number" id="widthInput" class="input-field" placeholder="Ширина (b)">
+    </div>
+    <button class="button" onclick="calculateArea()">Обчислити площу</button>
+    <div id="resultContainer"></div>
+    <div id="rectangleContainer"></div>
+
+    <script>
+        // Функція для обчислення площі прямокутника
+        function calculateArea() {
+            const length = parseFloat(document.getElementById("lengthInput").value);
+            const width = parseFloat(document.getElementById("widthInput").value);
+            if (isNaN(length) || isNaN(width) || length <= 0 || width <= 0) {
+                document.getElementById("resultContainer").innerHTML = "Будь ласка, введіть коректні позитивні числа.";
+                document.getElementById("rectangleContainer").innerHTML = "";
+                return;
+            }
+            const area = length * width;
+            displayResult(area);
+            drawRectangle(area);
+        }
+
+        // Функція для відображення результату
+        function displayResult(area) {
+            document.getElementById("resultContainer").innerHTML = `Площа прямокутника: ${area}`;
+        }
+
+        // Функція для малювання прямокутника
+        function drawRectangle(area) {
+            const rectangleContainer = document.getElementById("rectangleContainer");
+            rectangleContainer.innerHTML = ""; // Очищення попереднього малюнка
+            const size = Math.sqrt(area) * 10; // Збільшення масштабу
+            const rectangle = document.createElement("div");
+            rectangle.className = "rectangle";
+            rectangle.style.width = size + "px";
+            rectangle.style.height = size / 2 + "px"; // Висота пропорційно ширині
+            rectangle.style.margin = "0 auto"; // Центрування
+            rectangleContainer.appendChild(rectangle);
+        }
+    </script>
+</body>
+</html>
